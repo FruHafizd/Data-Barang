@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kategori extends Model
+class Stok extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'nama_kategori', 'deskripsi'
+        'barang_id', 'jumlah_masuk', 'jumlah_keluar', 'tanggal'
     ];
 
     public function barang()
     {
-        return $this->hasMany(Barang::class);
+        return $this->belongsTo(Barang::class);
     }
 
 }
