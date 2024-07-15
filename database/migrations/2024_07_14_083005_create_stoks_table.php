@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('stoks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('barang_id')->constrained('barang');
+            $table->foreignId('barang_id')->constrained('barangs');
             $table->integer('jumlah_masuk')->default(0);
             $table->integer('jumlah_keluar')->default(0);
             $table->dateTime('tanggal');
