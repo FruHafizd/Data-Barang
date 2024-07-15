@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('detail_transaksi', function (Blueprint $table) {
             $table->id();
             $table->foreignId('transaksi_id')->constrained('transaksis');
-            $table->foreignId('barang_id')->constrained('barang');
+            $table->foreignId('barang_id')->constrained('barangs');
             $table->integer('kuantitas');
             $table->decimal('harga_satuan', 10, 2);
             $table->decimal('subtotal', 10, 2);
