@@ -14,6 +14,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -65,13 +67,34 @@ class BarangResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('nama_barang')
+                    ->searchable()
+                    ->label('Product Name'),
+                TextColumn::make('kode_barang')
+                    ->searchable()
+                    ->label('Product Code'),
+                TextColumn::make('kategori.nama_kategori')
+                    ->searchable()
+                    ->label('Categories Product'),
+                TextColumn::make('harga')
+                    ->label('Price'),
+                TextColumn::make('stok')
+                    ->label('Stock Produt'),
+                TextColumn::make('deskripsi')
+                    ->label('Description'),
+                ImageColumn::make('gambar')
+                    ->label("Image Product")
+                  
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+                ->label('Move To Trash')
+                ->modalHeading('Move To Trash')
+                ->successNotificationTitle('Succes Deleted'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
