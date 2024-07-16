@@ -5,7 +5,12 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BarangResource\Pages;
 use App\Filament\Resources\BarangResource\RelationManagers;
 use App\Models\Barang;
+use App\Models\Kategori;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -23,7 +28,36 @@ class BarangResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('nama_barang')
+                    ->label('Product Name')
+                    ->required(),
+                TextInput::make('kode_barang')
+                    ->label('Product Code')
+                    ->required(),
+                Select::make('kategori_id')
+                    ->label('Categories Product')
+                    ->options(Kategori::all()->pluck('nama_kategori', 'id'))
+                    ->required(),
+                TextInput::make('harga')
+                    ->label('Price')
+                    ->numeric()
+                    ->step(0.01)
+                    ->required(),
+                TextInput::make('stok')
+                    ->label('Stock Produt')
+                    ->numeric()
+                    ->columnSpanFull()
+                    ->required(),
+                Textarea::make('deskripsi')
+                    ->label('Description')
+                    ->maxLength(255)
+                    ->autosize()
+                    ->columnSpanFull()
+                    ->helperText('Description A Product'),
+                FileUpload::make('gambar')
+                    ->label("Image Product")
+                    ->image()
+                    ->columnSpanFull(),
             ]);
     }
 
