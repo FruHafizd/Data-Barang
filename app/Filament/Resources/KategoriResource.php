@@ -6,9 +6,11 @@ use App\Filament\Resources\KategoriResource\Pages;
 use App\Filament\Resources\KategoriResource\RelationManagers;
 use App\Models\Kategori;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -23,7 +25,12 @@ class KategoriResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('nama_kategori')
+                    ->label('Category Product')
+                    ->required(),  
+                TextInput::make('deskripsi')
+                    ->label('Description Product')
+                    ->required(),
             ]);
     }
 
@@ -31,13 +38,21 @@ class KategoriResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('nama_kategori')
+                    ->searchable()
+                    ->label('Category Product'),
+                TextColumn::make('deskripsi')
+                    ->label('Description Product'),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+                ->label('Move To Trash')
+                ->modalHeading('Move To Trash')
+                ->successNotificationTitle('Succes Deleted'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

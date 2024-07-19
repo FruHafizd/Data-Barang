@@ -58,7 +58,6 @@ class BarangResource extends Resource
                     ->helperText('Description A Product'),
                 FileUpload::make('gambar')
                     ->label("Image Product")
-                    ->image()
                     ->columnSpanFull(),
             ]);
     }
@@ -84,6 +83,7 @@ class BarangResource extends Resource
                     ->label('Description'),
                 ImageColumn::make('gambar')
                     ->label("Image Product")
+                    ->getStateUsing(fn($record) => asset('storage/' . $record->gambar))
                   
             ])
             ->filters([
