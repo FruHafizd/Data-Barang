@@ -16,7 +16,9 @@ return new class extends Migration
             $table->dateTime('tanggal_transaksi');
             $table->decimal('total', 10, 2);
             $table->foreignId('user_id')->constrained('users');
-            $table->enum('status', ['pending', 'completed', 'canceled'])->default('pending');
+            $table->boolean('pending')->default(true);
+            $table->boolean('completed')->default(false);
+            $table->boolean('canceled')->default(false);
             $table->timestamps();
         });
     }
