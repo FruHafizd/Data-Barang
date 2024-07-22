@@ -21,7 +21,13 @@ class DetailTransaksiResource extends Resource
 {
     protected static ?string $model = DetailTransaksi::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    public static function getModelLabel(): string
+    {
+        return __('Detail Transcation');
+    }
+
+
+    protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
     public static function form(Form $form): Form
     {
